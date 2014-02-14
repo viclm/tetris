@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Tetris</title>
+<style type="text/css">
+body{
+    text-align:center;
+}
+#tetris{
+    margin:0 auto;
+    width:450px;
+}
+#canvas{
+    float:left;
+    background-color:#bfbfbf;
+}
+#tips{
+    background-color:#bfbfbf;
+}
+#dashboard {
+    float:right;
+}
+</style>
+<script type="text/javascript" src="../libs/jquery/jquery.js"></script>
+<script type="text/javascript" src="../src/tetris.js"></script>
+</head>
+<body>
+<div id="tetris">
+    <h1>Tetris</h1>
+    <canvas height="500" width="300" id="canvas"></canvas>
+    <div id="dashboard">
+        <canvas width="100" height="100" id="tips"></canvas>
+        <div>Score <span id="score">0</span></div>
+        <div>Level <span id="level">1</span></div>
+        <input type="button" value="Start" id="start"/><br>
+        <input type="button" value="Pause" id="pause"/><br>
+        <input type="button" value="Restore" id="restore"/>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+var t = tetris({
+    score: function (s){
+        $('#score').html(s);
+    },
+    over : function(){
+        $('<div>')
+        .css({width:'300px',color:'#fff',fontSize:'72px',zIndex:'10',position:'absolute'})
+        .html('GAME OVER')
+        .appendTo('#tetris');
+    },
+    level: function (s){
+        $('#level').html(s);
+    }
+});
+$('#start').click(function(){
+    t.play();
+});
+$('#pause').click(function(){
+    t.pause();
+});
+$('#restore').click(function(){
+    t.restore();
+});
+
+</script>
+</html>
